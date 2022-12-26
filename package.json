@@ -22,6 +22,10 @@
     "type": "git",
     "url": "git+https://github.com/a99os/Zapravka-telegarmbot.git"
   },
+  "bugs": {
+    "url": "https://github.com/a99os/Zapravka-telegarmbot/issues"
+  },
+  "homepage": "https://github.com/a99os/Zapravka-telegarmbot#readme",
   "keywords": [],
   "author": "",
   "dependencies": {
