@@ -11,7 +11,9 @@ export async function getStation(ctx: Context, lang: String, place: string) {
     if (lang === "UZB") {
       return `Номи: <b>${station.dataValues.name || "❌"}</b>
 Манзили:<b>${station.dataValues.address || "❌"}</b>
-Телефон рақами: <b>${station.dataValues.phone || "❌"}</b>
+Телефон рақами: <b>${
+        station.dataValues.phone ? "+998" + station.dataValues.phone : "❌"
+      }</b>
 Расми:<b>${station.dataValues.image ? "✅" : "❌"}</b>
 Иш вақти:<b>${station.dataValues.work_time || "❌"}</b>
 Ёқилғи тури:<b>${"❌"}</b>
@@ -20,7 +22,9 @@ export async function getStation(ctx: Context, lang: String, place: string) {
     } else {
       return `Имя: <b>${station.dataValues.name || "❌"}</b>
 Адрес: <b>${station.dataValues.address || "❌"}</b>
-Номер телефона: <b>${station.dataValues.phone || "❌"}</b>
+Номер телефона: <b>${
+        station.dataValues.phone ? "+998" + station.dataValues.phone : "❌"
+      }</b>
 Изображение: <b>${station.dataValues.image ? "✅" : "❌"}</b>
 Время работы:<b>${station.dataValues.work_time || "❌"}</b>
 Тип топлива:<b>${"❌"}</b>

@@ -55,3 +55,17 @@ export async function bekor_qilish_uzb(
       .resize(),
   });
 }
+export async function fuel_type_uzb(
+  ctx: Context,
+  text1: string,
+  text2: string
+) {
+  await deleteChat(ctx);
+  await ctx.reply(text2);
+  await ctx.reply(text1, {
+    parse_mode: "HTML",
+    ...Markup.keyboard([["❌ Бекор қилиш"]])
+      .oneTime()
+      .resize(),
+  });
+}
