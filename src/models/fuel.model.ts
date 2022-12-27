@@ -21,7 +21,7 @@ interface FuelModel
   measure?: string;
   fuel_state?: string;
 }
-export const Fuel = sequelize.define<FuelModel>("ads", {
+export const Fuel = sequelize.define<FuelModel>("fuel", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

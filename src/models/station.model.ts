@@ -24,7 +24,7 @@ interface StationModel
   is_active?: boolean;
   station_state?: string;
 }
-export const Station = sequelize.define<StationModel>("ads", {
+export const Station = sequelize.define<StationModel>("station", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

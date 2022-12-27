@@ -3,6 +3,9 @@ import { bot } from "../core/bot.js";
 import { Composer, Markup } from "telegraf";
 
 import { getLang } from "../libs/lang.js";
+import { Station } from "../models/station.model.js";
+import { bekor_qilish_rus, bekor_qilish_uzb } from "../libs/main_menu.js";
+import { getStation } from "../libs/addStation.js";
 const composer = new Composer();
 
 composer.on("contact", async (ctx) => {
@@ -35,6 +38,13 @@ composer.on("contact", async (ctx) => {
         await ctx.reply(`👉 /start`);
       } else {
         await user.update({ phone_number: contact });
+        await Station.create({ user_id: `${user_id}`, station_state: "name" });
+        const str = getStation(ctx, lang, "onKontact42");
+        bekor_qilish_uzb(
+          ctx,
+          `✏️ Ёқилғи қуйиш шахобчаси номини киритинг`,
+          `${str}`
+        );
       }
     }
   } else {
@@ -60,6 +70,10 @@ composer.on("contact", async (ctx) => {
         await ctx.reply(`👉 /start`);
       } else {
         await user.update({ phone_number: contact });
+        console.log("buyer");
+        await Station.create({ user_id: `${user_id}`, station_state: "name" });
+        const str = await getStation(ctx, `${lang}`, "onKontact75");
+        bekor_qilish_rus(ctx, `✏️ Введите название заправки`, `${str}`);
       }
     }
   }
