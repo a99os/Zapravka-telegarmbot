@@ -23,6 +23,7 @@ interface StationModel
   info?: string;
   is_active?: boolean;
   station_state?: string;
+  fuel_list?: string[];
 }
 export const Station = sequelize.define<StationModel>("station", {
   id: {
@@ -40,5 +41,6 @@ export const Station = sequelize.define<StationModel>("station", {
   work_time: { type: DataTypes.STRING },
   info: { type: DataTypes.TEXT },
   station_state: { type: DataTypes.STRING },
-  is_active: { type: DataTypes.BOOLEAN },
+  is_active: { type: DataTypes.BOOLEAN, defaultValue: false },
+  fuel_list: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: [] },
 });

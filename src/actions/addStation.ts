@@ -6,6 +6,7 @@ import { getLang } from "../libs/lang.js";
 import { Station } from "../models/station.model.js";
 import { bekor_qilish_rus, bekor_qilish_uzb } from "../libs/main_menu.js";
 import { getStation } from "../libs/addStation.js";
+import { fuelKeyboard } from "../libs/keyboard.js";
 const composer = new Composer();
 
 composer.on("message", async (ctx) => {
@@ -31,7 +32,7 @@ composer.on("message", async (ctx) => {
       case "name": {
         if ("text" in ctx.message) {
           station.name = ctx.message.text;
-          station.station_state = "address";
+          station.station_state = "time";
           await station.save();
           if (lang === "UZB") {
             const str = await getStation(ctx, "UZB", "addAction 38");
@@ -188,6 +189,51 @@ composer.on("message", async (ctx) => {
         break;
       }
       case "time": {
+        if ("text" in ctx.message) {
+          station.work_time = ctx.message.text;
+          station.station_state = "fuel";
+          await station.save();
+          if (lang === "UZB") {
+            const str = await getStation(ctx, "UZB", "addAction 38");
+            await bekor_qilish_uzb(ctx, "✏️ Ёқилғи турини танланг", `${str}`);
+            await ctx.reply(
+              "<b>Қуйидагилардан заправкада мавжудларини танланг 👇</b>",
+              {
+                parse_mode: "HTML",
+                ...fuelKeyboard["umumiy_uzb"],
+              }
+            );
+          } else {
+            const str = await getStation(ctx, "RUS", "addAction 45");
+            await bekor_qilish_rus(ctx, "✏️ Выберите тип топлива", `${str}`);
+            await ctx.reply(
+              "<b>Выбирайте те, что доступны на вашей заправке👇</b>",
+              {
+                parse_mode: "HTML",
+                ...fuelKeyboard["umumiy_rus"],
+              }
+            );
+          }
+        } else {
+          if (lang === "UZB") {
+            const str = await getStation(ctx, "UZB", "addAction 38");
+            bekor_qilish_uzb(
+              ctx,
+              "✏️ Ёқилғи қуйиш шахобчаси ишлаш вақтини киритинг. намуна(6:00-22:00, 7/24)",
+              `${str}`
+            );
+          } else {
+            const str = await getStation(ctx, "RUS", "addAction 45");
+            bekor_qilish_rus(
+              ctx,
+              "✏️ Zapravkaning ишлаш вақтини киритинг. намуна(6:00-22:00, 7/24)",
+              `${str}`
+            );
+          }
+        }
+        break;
+      }
+      case "fuel": {
         if ("text" in ctx.message) {
           station.work_time = ctx.message.text;
           station.station_state = "fuel";

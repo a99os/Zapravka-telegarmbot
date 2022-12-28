@@ -55,6 +55,7 @@ export async function bekor_qilish_uzb(
       .resize(),
   });
 }
+
 export async function fuel_type_uzb(
   ctx: Context,
   text1: string,
